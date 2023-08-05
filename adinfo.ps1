@@ -1,8 +1,8 @@
 Import-module ActiveDirectory
 
-Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-"
-Write-Host "Для справки введите help или -h"
-Write-Host "Для выхода введите exit или -e"
+Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-" -ForegroundColor Green
+Write-Host "Для справки введите help или -h" -ForegroundColor Yellow
+Write-Host "Для выхода введите exit или -e" -ForegroundColor Yellow
 
 while($true) {
     $input = Read-Host "ADInfo"
@@ -69,7 +69,7 @@ while($true) {
         
         } else {
             
-            Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..."
+            Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..." -ForegroundColor Red
         }
 
         # Change Password
@@ -86,7 +86,7 @@ while($true) {
 
             Set-ADAccountPassword $user -Reset -NewPassword (ConvertTo-SecureString -AsPlainText $UnsecurePassword -Force -Verbose) –PassThru
 
-            Write-Host "Пароль был успешно изменен"
+            Write-Host "Пароль был успешно изменен" -ForegroundColor Green
         }
 
         # Extension Password
@@ -97,8 +97,8 @@ while($true) {
             
             Set-ADUser $user -Replace @{pwdLastSet='0'}
             Set-ADUser $user -Replace @{pwdLastSet='-1'}        
-
-            Write-Host "Пароль был успешно продлен"
+             
+            Write-Host "Пароль был успешно продлен" -ForegroundColor Green
         }
 
         # Set PhoneNumbera-a
@@ -113,13 +113,13 @@ while($true) {
                 $newPhone = $parameters[2]                             
                 Set-ADUser $user -Clear "telephoneNumber"
                 Set-ADUser $user -Add @{telephoneNumber = $newPhone}
-                Write-Host "Телефон был успешно обновлен"
+                Write-Host "Телефон был успешно обновлен" -ForegroundColor Green
             } 
         }
               
 
     } catch {
-        Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..."
+        Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..." -ForegroundColor Red
     }
 
 }
