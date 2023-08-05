@@ -8,18 +8,32 @@ while($true) {
     }
 
     try {
-        if ($input -like "*@kazminerals.com") {
-            $email = $input
+        if ($input -like "email*") {
+            $parameters = $input.split(" ") 
+            $email = $parameters[1]
             Get-ADUser -Filter {UserPrincipalName -like $email} -Properties otherTelephone, telephoneNumber, employeeID
-        } elseif ($input -like "* *") { 
-            $cn = $input
+        } elseif ($input -like "nameLastname*") { 
+            $parameters = $input.split(" ") 
+            $cn = $parameters[1] + " " + $parameters[2]
             Get-ADUser -Filter {cn -like $cn} -Properties otherTelephone, telephoneNumber, employeeID
         }
-        else {
-            $login = $input
-            Get-ADUser -Filter {mailNickname -like $login} -Properties otherTelephone, telephoneNumber, employeeID        
-            Get-ADUser -Filter {sn -like $login} -Properties otherTelephone, telephoneNumber, employeeID
-            Get-ADUser -Filter {givenName -like $login} -Properties otherTelephone, telephoneNumber, employeeID
+        elseif ($input -like "login*") {
+            $parameters = $input.split(" ") 
+            $login = $parameters[1]
+            Get-ADUser -Filter {mailNickname -like $login} -Properties otherTelephone, telephoneNumber, employeeID       
+        }
+
+        elseif ($input -like "lastname*") {
+            $parameters = $input.split(" ") 
+            $sn = $parameters[1]                 
+            Get-ADUser -Filter {sn -like $sn} -Properties otherTelephone, telephoneNumber, employeeID
+        }
+        elseif ($input -like "name*") {
+            $parameters = $input.split(" ") 
+            $givenName = $parameters[1]                 
+            Get-ADUser -Filter {givenName -like $givenName} -Properties otherTelephone, telephoneNumber, employeeID
+        } else {
+            Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..."
         }
 
         # Change Password
@@ -80,12 +94,13 @@ while($true) {
 
 
     if($input -eq "-help" -or $input -eq "-h") {
-        Write-Host "-==*** Утилита ADInfo v0.1.10 04/08/2023 ***==-"
+        Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-"
         Write-Host "Для получения справки об УЗ пользователя
-        введите login: maxim.abylkassov
-        введите name: maxim
-        введите lastname: abylkassov
-        введите email: maxim.abylkassov@kazminerals.com"
+        введите login login: maxim.abylkassov
+        введите name name: maxim
+        введите nameLastname name lastname: maxim abylkassov
+        введите lastname lastname: abylkassov
+        введите email email: maxim.abylkassov@kazminerals.com"
         Write-Host "Для изменения пароля УЗ пользователя
         введите login -NewPassword: maxim.abylkassov -NewPassword"
         Write-Host "Для продления пароля УЗ пользователя
