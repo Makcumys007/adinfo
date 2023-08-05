@@ -19,6 +19,7 @@ while($true) {
             $login = $input
             Get-ADUser -Filter {mailNickname -like $login} -Properties otherTelephone, telephoneNumber, employeeID        
             Get-ADUser -Filter {sn -like $login} -Properties otherTelephone, telephoneNumber, employeeID
+            Get-ADUser -Filter {givenName -like $login} -Properties otherTelephone, telephoneNumber, employeeID
         }
 
         # Change Password
@@ -65,12 +66,16 @@ while($true) {
                 Write-Host "Телефон был успешно обновлен"
             } 
         }
-        
+              
 
     } catch {
         Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..."
     }
 
+        
+        
+
+   
     
 
 
@@ -86,6 +91,10 @@ while($true) {
         введите login -PwdExtension: maxim.abylkassov -PwdExtension"
         Write-Host "Для изменения телевона в УЗ пользователя 
         введите login -SetPhone number: maxim.abylkassov -SetPhone 50393"
+        Write-Host "Для получениясправки
+        введите -help или -h"
+        Write-Host "Для выхода из утелиты
+        введите exit или -e"
     }
     
 
