@@ -24,6 +24,9 @@ while($true) {
             введите lastname lastname: abylkassov
             введите email email: maxim.abylkassov@kazminerals.com"
 
+            Write-Host "Для получения списка всех групп пользователя
+            введите login -GetGroups: maxim.abylkassov -GetGroups"
+
             Write-Host "Для изменения пароля УЗ пользователя
             введите login -NewPassword: maxim.abylkassov -NewPassword"
 
@@ -114,6 +117,15 @@ while($true) {
                 Set-ADUser $user -Add @{telephoneNumber = $newPhone}
                 Write-Host "Телефон был успешно обновлен" -ForegroundColor Green
             } 
+        }
+
+        elseif ($input -like "*-GetGroups") {
+            $parameters = $input.split(" ")   
+
+            $user = $parameters[0]
+
+            Get-ADPrincipalGroupMembership $user | select name
+
         }
 
         else {
