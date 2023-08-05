@@ -69,14 +69,11 @@ while($true) {
             $givenName = $parameters[1]                 
             Get-ADUser -Filter {givenName -like $givenName} -Properties otherTelephone, telephoneNumber, employeeID
         
-        } else {
-            
-            Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..." -ForegroundColor Red
-        }
+        } 
 
         # Change Password
 
-        if ($input -like "*-NewPassword") {
+        elseif ($input -like "*-NewPassword") {
             
             $user = $input.split(" ")[0]
             
@@ -93,7 +90,7 @@ while($true) {
 
         # Extension Password
 
-        if ($input -like "*-PwdExtension") {
+        elseif ($input -like "*-PwdExtension") {
             
             $user = $input.split(" ")[0]
             
@@ -105,7 +102,7 @@ while($true) {
 
         # Set PhoneNumbera-a
 
-        if ($input -like "*-SetPhone*") {
+        elseif ($input -like "*-SetPhone*") {
             
             $parameters = $input.split(" ")   
 
@@ -117,6 +114,11 @@ while($true) {
                 Set-ADUser $user -Add @{telephoneNumber = $newPhone}
                 Write-Host "Телефон был успешно обновлен" -ForegroundColor Green
             } 
+        }
+
+        else {
+            
+            Write-Host "Что то пошло не так, попробуйте еще раз или введите exit для выхода..." -ForegroundColor Red
         }
               
 
