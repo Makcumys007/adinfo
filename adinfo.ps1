@@ -82,7 +82,8 @@ while($true) {
     if($input -eq "-help" -or $input -eq "-h") {
         Write-Host "-==*** Утилита ADInfo v0.1.10 04/08/2023 ***==-"
         Write-Host "Для получения справки об УЗ пользователя
-        введить login: maxim.abylkassov
+        введите login: maxim.abylkassov
+        введите name: maxim
         введите lastname: abylkassov
         введите email: maxim.abylkassov@kazminerals.com"
         Write-Host "Для изменения пароля УЗ пользователя
