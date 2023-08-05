@@ -1,7 +1,11 @@
 Import-module ActiveDirectory
 
+Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-"
+Write-Host "Для справки введите help или -h"
+Write-Host "Для выхода введите exit или -e"
+
 while($true) {
-    $input = Read-Host "Пожалуйста, введите email/login"
+    $input = Read-Host "ADInfo"
     $input = $input.Trim()
     if($input -eq "exit" -or $input -eq "-e") {
         break
@@ -9,7 +13,7 @@ while($true) {
 
     try {
         
-        if($input -eq "-help" -or $input -eq "-h") {
+        if($input -eq "help" -or $input -eq "-h") {
 
             Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-"
 
