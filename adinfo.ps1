@@ -15,7 +15,7 @@ while($true) {
         
         if($input -eq "help" -or $input -eq "-h") {
 
-            Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-"
+            Write-Host "-==*** Утилита ADInfo v0.1.12 05/08/2023 ***==-" -ForegroundColor Green
 
             Write-Host "Для получения справки об УЗ пользователя
             введите login login: maxim.abylkassov
@@ -38,6 +38,8 @@ while($true) {
 
             Write-Host "Для выхода из утелиты
             введите exit или -e"
+
+            Write-Host "Разработчик Maxim.Abylkassov" -ForegroundColor Green
 
         } elseif ($input -like "email*") {
             $parameters = $input.split(" ") 
