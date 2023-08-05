@@ -33,6 +33,12 @@ while($true) {
             Write-Host "Для продления пароля УЗ пользователя
             введите login -PwdExtension: maxim.abylkassov -PwdExtension"
 
+            Write-Host "Для отключения УЗ пользователя
+            введите login -Disable: maxim.abylkassov -Disable"
+
+            Write-Host "Для включения УЗ пользователя
+            введите login -Enable: maxim.abylkassov -Enable"
+
             Write-Host "Для изменения телевона в УЗ пользователя 
             введите login -SetPhone number: maxim.abylkassov -SetPhone 50393"
 
@@ -126,6 +132,16 @@ while($true) {
 
             Get-ADPrincipalGroupMembership $user | select name
 
+        } elseif($input -like "*-Enable") {
+            $parameters = $input.split(" ")   
+
+            $user = $parameters[0]
+            Enable-ADAccount -Identity $user
+        } elseif($input -like "*-Disable") {
+            $parameters = $input.split(" ")   
+
+            $user = $parameters[0]
+            Disable-ADAccount -Identity $user
         }
 
         else {
