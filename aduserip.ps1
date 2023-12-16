@@ -37,10 +37,10 @@ while($true) {
         } elseif ($input -like "lastuser*") {
             $parameters = $input.split(" ") 
             $user = $parameters[1] + ' ' + $parameters[2]
-            Write-Host $user
+            Write-Host $user -ForegroundColor Yellow
             $user = "$user*"
             # Ищем компьютер по description
-                $computers = Get-ADComputer -Filter {description -like $user} -Properties IPv4Address, LastLogonDate
+                $computers = Get-ADComputer -Filter {description -like $user} -Properties IPv4Address, LastLogonDate, OperatingSystem, extensionAttribute3, extensionAttribute1
 
                 # Выводим значение атрибута extensionAttribute5 для каждого компьютера
                 foreach ($computer in $computers) {
