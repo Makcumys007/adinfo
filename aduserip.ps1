@@ -1,4 +1,4 @@
-﻿
+
 
 # Подключаем модуль Active Directory
 Import-Module ActiveDirectory
@@ -40,15 +40,18 @@ while($true) {
             Write-Host $user
             $user = "$user*"
             # Ищем компьютер по description
-            $computers = Get-ADComputer -Filter {description -like $user} -Properties IPv4Address, LastLogonDate
+                $computers = Get-ADComputer -Filter {description -like $user} -Properties IPv4Address, LastLogonDate
 
-            # Выводим значение атрибута extensionAttribute5 для каждого компьютера
-            foreach ($computer in $computers) {
-                Write-Host "Computer Name: $($computer.Name)"
-                Write-Host "IPv4Address: $($computer.IPv4Address)"
-                Write-Host "LastLogonDate: $($computer.LastLogonDate)"
-                Write-Host "------------------------"
-            }
+                # Выводим значение атрибута extensionAttribute5 для каждого компьютера
+                foreach ($computer in $computers) {
+                    Write-Host "Computer Name: $($computer.Name)"
+                    Write-Host "IPv4Address: $($computer.IPv4Address)"
+                    Write-Host "OperatingSystem : $($computer.OperatingSystem)"
+                    Write-Host "Model of device: $($computer.extensionAttribute3)"
+                    Write-Host "Last User: $($computer.extensionAttribute1)"
+                    Write-Host "LastLogonDate: $($computer.LastLogonDate)"
+                    Write-Host "------------------------"
+                }
         
         } 
 
